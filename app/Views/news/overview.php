@@ -1,5 +1,14 @@
+<div class="row py-2 border-bottom">
+    <div class="col-12">
+        <a href="news/create" class="btn btn-success float-end">Create New Post</a>
+    </div>
+</div>
 <div class="row m-0">
     <div class="col-12">
+
+        <?php if (!empty($succMsg)) : ?>
+            <h2 class="bg success text-white"><?= esc($succMsg) ?></h2>
+        <?php endif ?>
 
         <h2 class="border-bottom border-4"><?= esc($title) ?></h2>
         <?php if (!empty($news) && is_array($news)) : ?>
@@ -11,8 +20,11 @@
                 <div class="main">
                     <?= esc($news_item['body']) ?>
                 </div>
-                <p><a href="/news/<?= esc($news_item['slug'], 'url') ?>" class="btn btn-success">View article</a></p>
-
+                <p>
+                    <a href="/news/<?= esc($news_item['slug'], 'url') ?>" class="btn btn-success">View</a>
+                    <a href="/news/edit/<?= esc($news_item['id'], 'url') ?>" class="btn btn-primary">Edit</a>
+                    <a href="/news/delete/<?= esc($news_item['id'], 'url') ?>" class="btn btn-danger" onClick="return confirm('Do you really want to delete this news ?');">Delete</a>
+                </p>
             <?php endforeach ?>
 
         <?php else : ?>
